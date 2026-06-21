@@ -326,6 +326,8 @@ placeholder="Confirm password">
 <input
 type="text"
 id="referralCode"
+maxlength="6"
+inputmode="numeric"
 required
 placeholder="Enter referral code">
 
@@ -626,7 +628,7 @@ document.getElementById("confirm password").value;
 let referral =
 document.getElementById("referralCode").value;
 
-if(referral !== "1024"){
+if(referral !== "DeV738"){
   msg.innerHTML = "❌ Invalid referral code";
   btn.disabled = false;
   btn.innerHTML = "SIGN UP";
